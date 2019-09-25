@@ -2,6 +2,23 @@ import React, { Component } from "react";
 
 export default class Search extends Component {
   render() {
+    const searchResults = this.props.searchResults.map(curr => {
+      return (
+        <button
+          key={curr.id}
+          data-id={curr.id}
+          className="currency"
+          onClick={() => {
+            this.props.handleSelect(curr.id);
+          }}
+        >
+          <li className="currency-list-item">
+            <span>{curr.name} </span>
+            <span className="currency_symbol">{curr.currency_symbol}</span>
+          </li>
+        </button>
+      );
+    });
     return (
       <div>
         <h1>Cryptocurrency Portfolio Calculator</h1>
@@ -20,6 +37,9 @@ export default class Search extends Component {
             />
           </div>
         </form>
+        <div className="currency-list">
+          <ul>{searchResults}</ul>
+        </div>
       </div>
     );
   }
