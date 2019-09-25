@@ -7,7 +7,7 @@ export default class PortfolioItem extends Component {
         <div className="row">
           <div className="col">
             <div className="header">Currency: </div>
-            <div className="text">{this.props.item.currency_name}</div>
+            <div className="text">{this.props.item.currency.name}</div>
           </div>
           <div className="col">
             <div className="header">Current Price:</div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Search from "./Search";
 import Calculate from "./Calculate";
 import axios from "axios";
-
+import Portfolio from "./Portfolio";
 export default class PortfolioContainer extends Component {
   state = {
     portfolio: [],
@@ -36,6 +36,7 @@ export default class PortfolioContainer extends Component {
     axios
       .post("http://localhost:3000/calculate", { id: currency.id, amount })
       .then(({ data }) => {
+        console.log(data);
         this.setState({
           portfolio: [...this.state.portfolio, data],
           amount: "",
@@ -73,6 +74,11 @@ export default class PortfolioContainer extends Component {
         handleChange={this.handleChange}
       />
     );
-    return <div>{searchOrCalc}</div>;
+    return (
+      <div>
+        {searchOrCalc}
+        <Portfolio portfolio={this.state.portfolio} />
+      </div>
+    );
   }
 }

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 export default class Calculate extends Component {
   render() {
-    console.log(this.props.active_currency);
-
     return (
       <div>
         <h1>How much {this.props.active_currency.name} do you own?</h1>
