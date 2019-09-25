@@ -5,7 +5,6 @@ import axios from "axios";
 
 export default class PortfolioContainer extends Component {
   state = {
-    name: "",
     portfolio: [],
     search_results: [],
     active_currency: null,
@@ -15,29 +14,65 @@ export default class PortfolioContainer extends Component {
     // this.setState({ [e.target.name]: e.target.value });
     axios
       .post("http://localhost:3000/search", { search: e.target.value })
-      .then(data => {
-        this.setState({ search_results: [...data.data.currencies] });
+      .then(({ data }) => {
+        this.setState({ search_results: [...data.currencies] });
       })
       .catch(data => {
         console.log(data);
       });
-    console.log(this.state.search_results);
   };
+
   handleSelect = id => {
-    console.log(id);
+    const [activeCurrency] = this.state.search_results.filter(
+      item => item.id === id
+    );
+    this.setState({ active_currency: activeCurrency, search_results: [] });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    let currency = this.state.active_currency;
+    let amount = this.state.amount;
+    axios
+      .post("http://localhost:3000/calculate", { id: currency.id, amount })
+      .then(({ data }) => {
+        this.setState({
+          portfolio: [...this.state.portfolio, data],
+          amount: "",
+          active_currency: null
+        });
+      })
+      .catch(data => {
+        console.log(data);
+      });
+  };
+  handleAmount = e => {
+    if (e.target.name === "amount") {
+      let regex = /[\D]/gi;
+      let result = regex.exec(e.target.value);
+      if (result) {
+        return;
+      }
+    }
+    this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    return (
-      <div>
-        <Search
-          handleSelect={id => {
-            this.handleSelect(id);
-          }}
-          searchResults={this.state.search_results}
-          handleChange={this.handleChange}
-        />
-        <Calculate />
-      </div>
+    const searchOrCalc = this.state.active_currency ? (
+      <Calculate
+        handleChange={this.handleAmount}
+        handleSubmit={this.handleSubmit}
+        active_currency={this.state.active_currency}
+        amount={this.state.amount}
+      />
+    ) : (
+      <Search
+        handleSelect={id => {
+          this.handleSelect(id);
+        }}
+        searchResults={this.state.search_results}
+        handleChange={this.handleChange}
+      />
     );
+    return <div>{searchOrCalc}</div>;
   }
 }

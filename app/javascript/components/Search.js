@@ -6,7 +6,6 @@ export default class Search extends Component {
       return (
         <button
           key={curr.id}
-          data-id={curr.id}
           className="currency"
           onClick={() => {
             this.props.handleSelect(curr.id);
