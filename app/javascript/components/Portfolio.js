@@ -6,11 +6,9 @@ export default class Portfolio extends Component {
     const portfolioItems = this.props.portfolio.map((item, index) => {
       return <PortfolioItem key={index} item={item} />;
     });
-    console.log(portfolioItems);
     const total = this.props.portfolio.reduce((total, curr) => {
       return total + curr.value;
     }, 0);
-    console.log(total);
     return (
       <div>
         <div className="portfolio-value">
