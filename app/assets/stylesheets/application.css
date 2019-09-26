@@ -32,7 +32,8 @@ body {
 
 .left {
   background: #f6f9fc;
-  padding: 10px;
+  height: 100vh;
+  overflow: auto;
 }
 
 .right {
