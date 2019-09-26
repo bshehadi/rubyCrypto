@@ -13,7 +13,7 @@ export default class PortfolioContainer extends Component {
   handleChange = e => {
     // this.setState({ [e.target.name]: e.target.value });
     axios
-      .post("http://localhost:3000/search", { search: e.target.value })
+      .post("/search", { search: e.target.value })
       .then(({ data }) => {
         this.setState({ search_results: [...data.currencies] });
       })
@@ -34,7 +34,7 @@ export default class PortfolioContainer extends Component {
     let currency = this.state.active_currency;
     let amount = this.state.amount;
     axios
-      .post("http://localhost:3000/calculate", { id: currency.id, amount })
+      .post("/calculate", { id: currency.id, amount })
       .then(({ data }) => {
         console.log(data);
         this.setState({
