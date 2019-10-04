@@ -68,16 +68,6 @@ export default class App extends Component {
               exact
               path={"/dashboard"}
               render={props => (
-                <Dashboard
-                  {...props}
-                  loggedInStatus={this.state.loggedInStatus}
-                />
-              )}
-            />
-            <Route
-              exact
-              path={"/portfolio"}
-              render={props => (
                 <PortfolioContainer
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
