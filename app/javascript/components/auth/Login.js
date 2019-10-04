@@ -12,7 +12,7 @@ export default class Login extends Component {
     const { email, password } = this.state;
     axios
       .post(
-        "/sessions",
+        "http://localhost:3000/sessions",
         {
           user: {
             email: email,

@@ -14,7 +14,7 @@ export default class Registration extends Component {
     console.log(email, password, password_confirmation);
     axios
       .post(
-        "/registrations",
+        "http://localhost:3000/registrations",
         {
           user: {
             email: email,
