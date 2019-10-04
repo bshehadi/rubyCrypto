@@ -10,6 +10,11 @@ export default class PortfolioContainer extends Component {
     active_currency: null,
     amount: ""
   };
+
+  createTransaction = async () =>{
+    const data = await axios.post("http://localhost:3000/transaction",{currency_id: 1, rebalance:5})
+    console.log(data);
+  }
   handleChange = e => {
     // this.setState({ [e.target.name]: e.target.value });
     axios
@@ -76,6 +81,7 @@ export default class PortfolioContainer extends Component {
     );
     return (
       <div className="grid">
+        <button style={{backgroundColor:"red"}}onClick={()=> this.createTransaction()}>CLICK HERE</button>
         <div className="left">{searchOrCalc}</div>
         <div className="right">
           <Portfolio portfolio={this.state.portfolio} />
