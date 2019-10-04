@@ -9,5 +9,4 @@ class Currency < ApplicationRecord
 		request = HTTParty.get(url + self.slug)
 		response = JSON.parse(request.body)[0]["price_usd"]
 	end
-
 end
