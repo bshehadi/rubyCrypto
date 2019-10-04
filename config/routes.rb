@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-	root "currencies#index"
 	get "api/test", to: "static#home"
 	post "search", to: "currencies#search"
 	post "calculate", to: "currencies#calculate"
@@ -7,4 +6,6 @@ Rails.application.routes.draw do
 	resources :registrations, only: [:create]
 	delete :logout, to: "sessions#logout"
 	get :logged_in, to: "sessions#logged_in"
- end
+	root "currencies#index"
+	get '*path', to: 'currencies#index'
+end

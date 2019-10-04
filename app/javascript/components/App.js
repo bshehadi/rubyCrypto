@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import PorfolioContainer from "./PortfolioContainer";
+import PortfolioContainer from "./PortfolioContainer";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
 import axios from "axios";
@@ -69,6 +69,16 @@ export default class App extends Component {
               path={"/dashboard"}
               render={props => (
                 <Dashboard
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={"/portfolio"}
+              render={props => (
+                <PortfolioContainer
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
                 />
