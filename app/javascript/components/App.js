@@ -21,7 +21,7 @@ export default class App extends Component {
 
   checkLoginStatus = () => {
     axios
-      .get("http://localhost:3000/logged_in", { withCredentials: true })
+      .get("/logged_in", { withCredentials: true })
       .then(res => {
         console.log(res);
         if (

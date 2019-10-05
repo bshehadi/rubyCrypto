@@ -12,7 +12,7 @@ export default class PortfolioContainer extends Component {
   };
 
   componentDidMount(){
-    axios.get("http://localhost:3000/transaction").then(({data})=>{
+    axios.get("/transaction").then(({data})=>{
     console.log(data);
     this.setState({portfolio:data.transactions})
   })
@@ -20,7 +20,7 @@ export default class PortfolioContainer extends Component {
   handleChange = e => {
     // this.setState({ [e.target.name]: e.target.value });
     axios
-      .post("http://localhost:3000/search", { search: e.target.value })
+      .post("/search", { search: e.target.value })
       .then(({ data }) => {
         this.setState({ search_results: [...data.currencies] });
       })
@@ -41,7 +41,7 @@ export default class PortfolioContainer extends Component {
     let currency = this.state.active_currency;
     let amount = this.state.amount;
     axios
-      .post("http://localhost:3000/transaction", { currency_id: currency.id, rebalance: amount })
+      .post("/transaction", { currency_id: currency.id, rebalance: amount })
       .then(({ data }) => {
         this.setState({
           portfolio: [...this.state.portfolio, data.transaction],
