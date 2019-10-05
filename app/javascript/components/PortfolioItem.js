@@ -7,19 +7,23 @@ export default class PortfolioItem extends Component {
         <div className="row">
           <div className="col">
             <div className="header">Currency: </div>
-            <div className="text">{this.props.item.currency.name}</div>
+            <div className="text">{this.props.item.currency}</div>
           </div>
           <div className="col">
-            <div className="header">Current Price:</div>
-            <div className="text">{this.props.item.current_price}</div>
+            <div className="header">Price bought at:</div>
+            <div className="text">{(+this.props.item.priceBoughtAt).toFixed(2)}</div>
           </div>
           <div className="col">
-            <div className="header">Amount in your Portfolio:</div>
-            <div className="text">{this.props.item.amount}</div>
+            <div className="header">Amount you bought:</div>
+            <div className="text">{this.props.item.rebalance}</div>
           </div>
           <div className="col">
-            <div className="header">Current Value:</div>
-            <div className="text">{this.props.item.value}</div>
+            <div className="header">Overall Value:</div>
+            <div className="text">{(+this.props.item.priceBoughtAt * +this.props.item.rebalance).toFixed(2)}</div>
+          </div>
+          <div className="col">
+            <div className="header">Date:</div>
+            <div className="text">{new Date(this.props.item.date).toLocaleDateString()}</div>
           </div>
         </div>
       </div>

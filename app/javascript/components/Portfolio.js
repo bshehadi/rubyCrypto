@@ -7,7 +7,7 @@ export default class Portfolio extends Component {
       return <PortfolioItem key={index} item={item} />;
     });
     const total = this.props.portfolio.reduce((total, curr) => {
-      return total + curr.value;
+      return total  + +curr.priceBoughtAt * +curr.rebalance
     }, 0);
     return (
       <div>

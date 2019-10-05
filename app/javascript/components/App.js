@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PortfolioContainer from "./PortfolioContainer";
 import Home from "./Home";
-import Dashboard from "./Dashboard";
 import axios from "axios";
 
 const csrfToken = document.querySelector("[name=\"csrf-token\"]").content;
