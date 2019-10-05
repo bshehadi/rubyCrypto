@@ -18,7 +18,7 @@ export default class PortfolioItem extends Component {
             <div className="text">{this.props.item.rebalance}</div>
           </div>
           <div className="col">
-            <div className="header">Current Value:</div>
+            <div className="header">Overall Value:</div>
             <div className="text">{(+this.props.item.priceBoughtAt * +this.props.item.rebalance).toFixed(2)}</div>
           </div>
           <div className="col">

@@ -12,7 +12,9 @@ export default class PortfolioContainer extends Component {
   };
 
   createTransaction = async () =>{
-    const data = await axios.post("http://localhost:3000/transaction",{currency_id: 1, rebalance:5})
+    const {data} = await axios.post("http://localhost:3000/transaction",{currency_id: 1, rebalance:5})
+    console.log(data);
+    this.setState({portfolio:[...this.state.portfolio, data.transaction]})
   }
   componentDidMount(){
     axios.get("http://localhost:3000/transaction").then(({data})=>{

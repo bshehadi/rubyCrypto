@@ -38,6 +38,8 @@ body {
 
 .right {
   background: #001628;
+  height:100vh;
+  overflow:auto;
 }
 
 .right h1 {

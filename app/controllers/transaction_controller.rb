@@ -9,9 +9,16 @@ class TransactionController < ApplicationController
         )
         transaction.current_price = transaction.currency.current_price()
         transaction.save
+        obj = {
+                currency: transaction.currency.name,
+                rebalance: transaction.rebalance,
+                priceBoughtAt: transaction.current_price,
+                slug: transaction.currency.currency_symbol,
+                date: transaction.created_at
+            }
         if transaction
             render json: {
-                transaction: transaction
+                transaction: obj
             }
         else
             render json: {
