@@ -20,4 +20,28 @@ class TransactionController < ApplicationController
         end
     end
 
+    def getAll
+        # Category.includes(articles: [{ comments: :guest }, :tags])
+        transactions = Transaction.where(:user_id => @current_user.id)
+        arr = [];
+        transactions.each do |transaction|
+            obj = {
+                currency: transaction.currency.name,
+                rebalance: transaction.rebalance,
+                priceBoughtAt: transaction.current_price,
+                slug: transaction.currency.currency_symbol
+            }
+            arr.push(obj)
+        end
+
+        if arr
+            render json:{
+                transactions: arr,
+            }
+        else
+            render json: {
+                status: 500
+            }
+        end
+    end
 end
