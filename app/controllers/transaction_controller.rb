@@ -29,7 +29,8 @@ class TransactionController < ApplicationController
                 currency: transaction.currency.name,
                 rebalance: transaction.rebalance,
                 priceBoughtAt: transaction.current_price,
-                slug: transaction.currency.currency_symbol
+                slug: transaction.currency.currency_symbol,
+                date: transaction.created_at
             }
             arr.push(obj)
         end
