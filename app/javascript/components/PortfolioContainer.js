@@ -81,7 +81,7 @@ export default class PortfolioContainer extends Component {
       />
     );
     return (
-      <div className="grid row d-flex">
+      <div className="grid d-flex">
         <div className="left col">{searchOrCalc}</div>
         <div className="right col">
           <Portfolio portfolio={this.state.portfolio} />
