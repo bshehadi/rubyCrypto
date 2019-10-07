@@ -19,14 +19,18 @@ export default class PortfolioContainer extends Component {
   }
   handleChange = e => {
     // this.setState({ [e.target.name]: e.target.value });
-    axios
-      .post("/search", { search: e.target.value })
-      .then(({ data }) => {
-        this.setState({ search_results: [...data.currencies] });
-      })
-      .catch(data => {
-        console.log(data);
-      });
+    if(e.target.value){
+      axios
+        .post("/search", { search: e.target.value })
+        .then(({ data }) => {
+          this.setState({ search_results: [...data.currencies] });
+        })
+        .catch(data => {
+          console.log(data);
+        });
+    }else{
+      this.setState({search_results:[]})
+    }
   };
 
   handleSelect = id => {
