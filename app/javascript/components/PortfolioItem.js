@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 export default class PortfolioItem extends Component {
   render() {
     return (
-      <div>
-        <div className="row">
+      <Fragment>
+        <div className="row currency">
           <div className="col">
             <div className="header">Currency: </div>
             <div className="text">{this.props.item.currency}</div>
@@ -26,7 +26,7 @@ export default class PortfolioItem extends Component {
             <div className="text">{new Date(this.props.item.date).toLocaleDateString()}</div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
