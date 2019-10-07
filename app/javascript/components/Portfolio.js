@@ -10,7 +10,7 @@ export default class Portfolio extends Component {
       return total  + +curr.priceBoughtAt * +curr.rebalance
     }, 0);
     return (
-      <div>
+      <div className="container-fluid">
         <div className="portfolio-value">
           <div className="portfolio-value--header">
             Your Portfolio value is:{" "}

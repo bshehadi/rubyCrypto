@@ -2,13 +2,18 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-import React from "react";
+import React, {Fragment} from "react";
 import ReactDOM from "react-dom";
 import App from "../components/App";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 document.addEventListener("DOMContentLoaded", () => {
+  let newDiv = document.createElement("div")
+  // newDiv.id = "container"
+  newDiv.className = "container-fluid"
   ReactDOM.render(
     <App />,
-    document.body.appendChild(document.createElement("div"))
+    document.body.appendChild(newDiv)
   );
 });

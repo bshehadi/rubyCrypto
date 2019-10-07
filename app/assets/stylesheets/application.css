@@ -22,7 +22,14 @@ body {
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
 }
-
+#container{
+  padding:0;
+  margin:0;
+}
+.row{
+  margin:0;
+  padding:0;
+}
 .grid {
   display: grid;
   grid-template-columns: 2fr 3fr;
@@ -32,13 +39,11 @@ body {
 
 .left {
   background: #f6f9fc;
-  height: 100vh;
   overflow: auto;
 }
 
 .right {
   background: #001628;
-  height:100vh;
   overflow:auto;
 }
 
@@ -99,9 +104,7 @@ label {
   flex-direction: row;
   background: white;
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-  padding: 20px 10px;
   border-radius: 8px;
-  margin: 10px 10px 10px 10px;
 }
 
 .col {
@@ -171,4 +174,10 @@ label {
 
 ul {
   padding: 0;
+}
+
+.currency{
+  padding:10px;
+  margin-top:10px;
+  margin-bottom:10px;
 }
