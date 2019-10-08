@@ -1,10 +1,10 @@
-import React, { Component,Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PortfolioContainer from "./PortfolioContainer";
 import Home from "./Home";
 import axios from "axios";
 
-const csrfToken = document.querySelector("[name=\"csrf-token\"]").content;
+const csrfToken = document.querySelector('[name="csrf-token"]').content;
 axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
 
 export default class App extends Component {

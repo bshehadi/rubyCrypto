@@ -8,18 +8,39 @@ export default class PortfolioContainer extends Component {
     portfolio: [],
     search_results: [],
     active_currency: null,
-    amount: ""
+    amount: "",
+    currencyBalance: {}
   };
 
-  componentDidMount(){
-    axios.get("/transaction").then(({data})=>{
-    console.log(data);
-    this.setState({portfolio:data.transactions})
-  })
+  componentDidMount() {
+    axios.get("/transaction").then(({ data }) => {
+      this.setState({ portfolio: data.transactions }, async () => {
+        let obj = this.state.currencyBalance;
+        for (let i = 0; i < this.state.portfolio.length; i++) {
+          const element = this.state.portfolio[i];
+          if (obj[element.currency_id]) {
+            obj[element.currency_id] =
+              +obj[element.currency_id] + +element.rebalance;
+          } else {
+            obj[element.currency_id] = +element.rebalance;
+          }
+        }
+        let priceObj = {};
+        for (const key in obj) {
+          const element = obj[key];
+          console.log(key, element);
+          let { data } = await axios.post("/getcurrencyprice", {
+            currency_id: key
+          });
+          priceObj[key] = +data.currency_price * obj[key];
+        }
+        this.setState({ currencyBalance: priceObj });
+      });
+    });
   }
   handleChange = e => {
     // this.setState({ [e.target.name]: e.target.value });
-    if(e.target.value){
+    if (e.target.value) {
       axios
         .post("/search", { search: e.target.value })
         .then(({ data }) => {
@@ -28,8 +49,8 @@ export default class PortfolioContainer extends Component {
         .catch(data => {
           console.log(data);
         });
-    }else{
-      this.setState({search_results:[]})
+    } else {
+      this.setState({ search_results: [] });
     }
   };
 
@@ -88,7 +109,10 @@ export default class PortfolioContainer extends Component {
       <div className="grid d-flex">
         <div className="left col">{searchOrCalc}</div>
         <div className="right col">
-          <Portfolio portfolio={this.state.portfolio} />
+          <Portfolio
+            currencyBalance={this.state.currencyBalance}
+            portfolio={this.state.portfolio}
+          />
         </div>
       </div>
     );

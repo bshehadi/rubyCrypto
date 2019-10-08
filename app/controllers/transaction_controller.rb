@@ -14,7 +14,8 @@ class TransactionController < ApplicationController
                 rebalance: transaction.rebalance,
                 priceBoughtAt: transaction.current_price,
                 slug: transaction.currency.currency_symbol,
-                date: transaction.created_at
+                date: transaction.created_at,
+                currency_id: transaction.currency_id
             }
         if transaction
             render json: {
@@ -37,7 +38,8 @@ class TransactionController < ApplicationController
                 rebalance: transaction.rebalance,
                 priceBoughtAt: transaction.current_price,
                 slug: transaction.currency.currency_symbol,
-                date: transaction.created_at
+                date: transaction.created_at,
+                currency_id: transaction.currency_id,
             }
             arr.push(obj)
         end
