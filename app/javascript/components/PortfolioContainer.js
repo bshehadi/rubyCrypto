@@ -27,8 +27,6 @@ export default class PortfolioContainer extends Component {
         }
         let priceObj = {};
         for (const key in obj) {
-          const element = obj[key];
-          console.log(key, element);
           let { data } = await axios.post("/getcurrencyprice", {
             currency_id: key
           });
@@ -68,10 +66,23 @@ export default class PortfolioContainer extends Component {
     axios
       .post("/transaction", { currency_id: currency.id, rebalance: amount })
       .then(({ data }) => {
+        let obj = this.state.currencyBalance;
+        if (obj[data.transaction.currency_id]) {
+          for (const key in obj) {
+            if (key == data.transaction.currency_id) {
+              obj[key] =
+                obj[key] +
+                +data.transaction.priceBoughtAt * +data.transaction.rebalance;
+            }
+          }
+        } else {
+          obj[data.transaction.currency_id] = +data.transaction.priceBoughtAt;
+        }
         this.setState({
           portfolio: [...this.state.portfolio, data.transaction],
           amount: "",
-          active_currency: null
+          active_currency: null,
+          currencyBalance: obj
         });
       })
       .catch(data => {
