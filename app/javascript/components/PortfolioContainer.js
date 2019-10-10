@@ -91,10 +91,20 @@ export default class PortfolioContainer extends Component {
   };
   handleAmount = e => {
     if (e.target.name === "amount") {
-      let regex = /[\D]/gi;
+      let regex = /[^\d.]/;
       let result = regex.exec(e.target.value);
       if (result) {
         return;
+      }
+      let periodCount = 0;
+      for (let i = 0; i < e.target.value.length; i++) {
+        const element = e.target.value[i];
+        if (element === ".") {
+          periodCount++;
+        }
+        if (periodCount === 2) {
+          return;
+        }
       }
     }
     this.setState({ [e.target.name]: e.target.value });
