@@ -55,13 +55,20 @@ export default class App extends Component {
             <Route
               exact
               path={"/"}
-              render={props => (
-                <Home
-                  {...props}
-                  handleLogin={this.handleLogin}
-                  loggedInStatus={this.state.loggedInStatus}
-                />
-              )}
+              render={props =>
+                this.state.user ? (
+                  <Home
+                    {...props}
+                    handleLogin={this.handleLogin}
+                    loggedInStatus={this.state.loggedInStatus}
+                  />
+                ) : (
+                  <PortfolioContainer
+                    {...props}
+                    loggedInStatus={this.state.loggedInStatus}
+                  />
+                )
+              }
             />
             <Route
               exact
@@ -69,6 +76,17 @@ export default class App extends Component {
               render={props => (
                 <PortfolioContainer
                   {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={"/login"}
+              render={props => (
+                <Home
+                  {...props}
+                  handleLogin={this.handleLogin}
                   loggedInStatus={this.state.loggedInStatus}
                 />
               )}
